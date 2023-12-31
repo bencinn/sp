@@ -1,0 +1,12 @@
+program HelloWorld;
+begin
+  x := y + z
+  p := (1 <= i) and (i < 100)
+  i := sqr(k) - (i * j)
+  hue1 := [blue, succ(c)]
+  p1^.mother := true
+  writeln('Hello, world!');
+end.
+
+
+
