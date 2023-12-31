@@ -7,8 +7,8 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"unicode"
 	"os"
+	"unicode"
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 		}
 		fmt.Println("[")
 		for _, tok := range f {
-      fmt.Printf(fmt.Sprintf("type: %12.12s with %2.2d length: %s\n", converter(tok.tokentype), len(tok.val), tok.val))
+			fmt.Printf(fmt.Sprintf("type: %12.12s with %2.2d length: %s\n", converter(tok.tokentype), len(tok.val), tok.val))
 		}
 		fmt.Println("]")
 	}
@@ -365,59 +365,57 @@ func lex(file []byte) ([]token, error) {
 }
 
 type abs_node interface {
-  get_type() int
-  get_val() string
-  construct(tokens []token) (abs_node, error)
+	get_type() int
+	get_val() string
+	construct(tokens []token) (abs_node, error)
 }
 
 const (
-  nt_program = iota
-  nt_block = iota
-  nt_var = iota
-  nt_funccall = iota
-  nt_int = iota
-  nt_string = iota
+	nt_program  = iota
+	nt_block    = iota
+	nt_var      = iota
+	nt_funccall = iota
+	nt_int      = iota
+	nt_string   = iota
 )
 
 type node_program struct {
-  name string
-  block abs_node
+	name  string
+	block abs_node
 }
 
 func (p node_program) get_type() int {
-  return nt_program
+	return nt_program
 }
 
 func (p node_program) get_val() string {
-  return p.name
+	return p.name
 }
 
 func (p node_program) construct(tokens []token) (abs_node, error) {
-  return nil, nil
+	return nil, nil
 }
 
 type node_int struct {
-  name string
-  value int
+	name  string
+	value int
 }
 
 func (p node_int) get_type() int {
-  return nt_int
+	return nt_int
 }
 
 func (p node_int) get_val() string {
-  return p.name
+	return p.name
 }
 
 func (p node_int) construct(tokens []token) (abs_node, error) {
-  if len(tokens) != 1 {
-    return nil, errors.New("expected one token")
-  }
-  switch tokens[0].tokentype {
-  case number:
-    return node_int{string(tokens[0].val), 0}, nil
-  }
-  return nil, errors.New("expected number")
+	if len(tokens) != 1 {
+		return nil, errors.New("expected one token")
+	}
+	switch tokens[0].tokentype {
+	case number:
+		return node_int{string(tokens[0].val), 0}, nil
+	}
+	return nil, errors.New("expected number")
 }
-
-
