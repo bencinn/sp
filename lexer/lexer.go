@@ -150,7 +150,7 @@ func Lex(file []byte) ([]Token, error) {
 			if i+1 >= len(file) {
 				return nil, errors.New(fmt.Sprintf("unexpected end of file at position %d", i))
 			}
-			if file[i+1] == '=' {
+      if file[i+1] == ':' {
 				tokens = append(tokens, Token{i, i + 2, file[i : i+2], becomes})
 				i++
 			} else {
