@@ -1,0 +1,8 @@
+linters:
+  enable:
+    - gofmt
+    - govet
+    - gosec
+    - typecheck
+run:
+  timeout: 1m
