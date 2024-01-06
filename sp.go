@@ -39,11 +39,13 @@ func main() {
 	tok, err := lexer.Lex([]byte(expr))
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 	p := parser{tok, -1, ""}
 	node, err := p.parse_expr()
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 	fmt.Println(node.get_val())
 }

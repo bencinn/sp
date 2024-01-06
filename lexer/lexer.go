@@ -1,9 +1,9 @@
 package lexer
 
 import (
-  "errors"
-  "fmt"
-  "unicode"
+	"errors"
+	"fmt"
+	"unicode"
 )
 
 type Token struct {
@@ -15,8 +15,8 @@ type Token struct {
 
 func Converter(aid Token) string {
 	switch aid.Tokentype {
-  case kw_end:
-    return "end"
+	case kw_end:
+		return "end"
 	case kw_program:
 		return "program"
 	}
@@ -51,9 +51,9 @@ const (
 	period     = iota
 	sstring    = iota
 	// keywords
-  kw_program = iota
-  kw_end = iota
-	)
+	kw_program = iota
+	kw_end     = iota
+)
 
 func Lex(file []byte) ([]Token, error) {
 	tokens := []Token{}
@@ -69,10 +69,10 @@ func Lex(file []byte) ([]Token, error) {
 			}
 			ttype := identifier
 			switch string(file[startpos:i]) {
-      case "end":
-        ttype = kw_end
-      case "program":
-        ttype = kw_program
+			case "end":
+				ttype = kw_end
+			case "program":
+				ttype = kw_program
 			}
 			tokens = append(tokens, Token{startpos, i, file[startpos:i], ttype})
 			i--
@@ -150,7 +150,7 @@ func Lex(file []byte) ([]Token, error) {
 			if i+1 >= len(file) {
 				return nil, errors.New(fmt.Sprintf("unexpected end of file at position %d", i))
 			}
-      if file[i+1] == ':' {
+			if file[i+1] == ':' {
 				tokens = append(tokens, Token{i, i + 2, file[i : i+2], becomes})
 				i++
 			} else {
@@ -167,5 +167,3 @@ func Lex(file []byte) ([]Token, error) {
 	}
 	return tokens, nil
 }
-
-
